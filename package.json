@@ -1,6 +1,6 @@
 {
   "name": "w-ui-dwload",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tool of download in browser.",
   "main": "dist/w-ui-dwload.umd.js",
   "dependencies": {

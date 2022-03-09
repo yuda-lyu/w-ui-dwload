@@ -11,6 +11,17 @@ A tool of download in browser.
 ## Documentation
 To view documentation or get support, visit [docs](https://yuda-lyu.github.io/w-ui-dwload/w-ui-dwload.html).
 
+## Example
+To view some examples for more understanding, visit examples:
+
+> **downloadPic:** [ex-downloadPic.html](https://yuda-lyu.github.io/w-ui-dwload/examples/ex-downloadPic.html) [[source code](https://github.com/yuda-lyu/w-ui-dwload/blob/master/docs/examples/ex-downloadPic.html)]
+
+> **downloadTable:** [ex-downloadTable.html](https://yuda-lyu.github.io/w-ui-dwload/examples/ex-downloadTable.html) [[source code](https://github.com/yuda-lyu/w-ui-dwload/blob/master/docs/examples/ex-downloadTable.html)]
+
+> **downloadLtdt:** [ex-downloadLtdt.html](https://yuda-lyu.github.io/w-ui-dwload/examples/ex-downloadLtdt.html) [[source code](https://github.com/yuda-lyu/w-ui-dwload/blob/master/docs/examples/ex-downloadLtdt.html)]
+
+> **downloadFile:** [ex-downloadFile.html](https://yuda-lyu.github.io/w-ui-dwload/examples/ex-downloadFile.html) [[source code](https://github.com/yuda-lyu/w-ui-dwload/blob/master/docs/examples/ex-downloadFile.html)]
+
 ## Installation
 ### Using npm(ES6 module):
 > **Note:** w-ui-dwload is mainly dependent on `lodash` and `wsemi`.
@@ -23,5 +34,5 @@ npm i w-ui-dwload
 
 Add script for w-ui-dwload.
 ```alias
-<script src="https://cdn.jsdelivr.net/npm/w-ui-dwload@1.0.0/dist/w-ui-dwload.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/w-ui-dwload@1.0.1/dist/w-ui-dwload.umd.js"></script>
 ```
