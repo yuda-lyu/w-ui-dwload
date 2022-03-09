@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>WUiDownload.mjs - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="w-ui-download.html">w-ui-download</a><ul class='methods'><li data-type='method'><a href="w-ui-download.html#.downloadFile">downloadFile</a></li><li data-type='method'><a href="w-ui-download.html#.downloadLtdt">downloadLtdt</a></li><li data-type='method'><a href="w-ui-download.html#.downloadPic">downloadPic</a></li><li data-type='method'><a href="w-ui-download.html#.downloadTable">downloadTable</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">WUiDownload.mjs</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import get from 'lodash/get'
+import isNumber from 'lodash/isNumber'
+import delay from 'wsemi/src/delay.mjs'
+import isarr from 'wsemi/src/isarr.mjs'
+import isestr from 'wsemi/src/isestr.mjs'
+import isfun from 'wsemi/src/isfun.mjs'
+import isbol from 'wsemi/src/isbol.mjs'
+import isearr from 'wsemi/src/isearr.mjs'
+import isu8arr from 'wsemi/src/isu8arr.mjs'
+import isEle from 'wsemi/src/isEle.mjs'
+import ispm from 'wsemi/src/ispm'
+import browserView from 'wsemi/src/browserView.mjs'
+import arrHas from 'wsemi/src/arrHas.mjs'
+import domConvertToPicDyn from 'wsemi/src/domConvertToPicDyn.mjs'
+import ltdtkeysheads2mat from 'wsemi/src/ltdtkeysheads2mat.mjs'
+import downloadFileFromB64 from 'wsemi/src/downloadFileFromB64.mjs'
+import downloadExcelFileFromDataDyn from 'wsemi/src/downloadExcelFileFromDataDyn.mjs'
+import downloadFileFromU8Arr from 'wsemi/src/downloadFileFromU8Arr.mjs'
+
+
+/**
+ * 前端UI下載套件
+ *
+ * @class w-ui-download
+ * @param {Object} vo 輸入前端共用操作物件，也就是掛載共用函數之處，例如Vue.prototype
+ * @param {Object} [opt={}] 輸入設定物件，預設{}
+ * @param {String} [opt.keyFunDownloadFileById='downloadFileById'] 輸入於vo內掛載下載檔案函數(downloadFileById)之鍵值字串，預設'downloadFileById'
+ * @param {String} [opt.keyFunUpdateLoading='updateLoading'] 輸入於vo內掛載顯示loading函數(updateLoading)之鍵值字串，預設'updateLoading'
+ * @param {String} [opt.keyFunAlert='alert'] 輸入於vo內掛載提案彈窗函數(alert)之鍵值字串，預設'alert'
+ * @param {Boolean} [opt.useBrowserView=true] 輸入當使用下載檔案函數(downloadFileById)時，是否於下載後自動於瀏覽器分頁開啟，預設true
+ * @param {Array} [opt.browserViewTypes=['text/plain', 'application/rtf', 'application/json', 'text/csv', 'text/html', 'text/xml', 'application/xml', 'application/pdf', 'image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/bmp', 'image/svg+xml', 'image/webp', 'audio/mpeg', 'video/mpeg', 'video/mp4', 'video/webm']] 輸入當使用下載檔案函數(downloadFileById)時，識別可自動開啟之檔案類型清單陣列，預設['text/plain', 'application/rtf', 'application/json', 'text/csv', 'text/html', 'text/xml', 'application/xml', 'application/pdf', 'image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/bmp', 'image/svg+xml', 'image/webp', 'audio/mpeg', 'video/mpeg', 'video/mp4', 'video/webm']
+ * @param {String} [opt.textErrorDownloadImage='無法下載圖片'] 輸入提示無法下載圖片字串，預設'無法下載圖片'
+ * @param {String} [opt.textErrorDownloadTable='無法下載表格數據'] 輸入提示無法下載表格數據字串，預設'無法下載表格數據'
+ * @param {String} [opt.textErrorDownloadLtdt='無法下載數據'] 輸入提示無法下載數據字串，預設'無法下載數據'
+ * @param {String} [opt.textInvalidElePic='elePic非元素'] 輸入提示elePic非元素字串，預設'elePic非元素'
+ * @param {String} [opt.textInvalidEleName='eleName非元素或字串'] 輸入提示eleName非元素或字串字串，預設'eleName非元素或字串'
+ * @param {String} [opt.textInvalidEleTable='eleTable非元素'] 輸入提示eleTable非元素字串，預設'eleTable非元素'
+ * @param {String} [opt.textInvalidLtdt='ltdt非陣列'] 輸入提示ltdt非陣列字串，預設'ltdt非陣列'
+ * @param {String} [opt.textInvalidFileId='無檔案主鍵'] 輸入提示無檔案主鍵字串，預設'無檔案主鍵'
+ * @param {String} [opt.textInvalidFilename='無檔案名稱'] 輸入提示無檔案名稱字串，預設'無檔案名稱'
+ * @param {String} [opt.textInvalidFileU8a='無檔案內容'] 輸入提示無檔案內容字串，預設'無檔案內容'
+ * @param {String} [opt.textInvalidFileType='無檔案類型'] 輸入提示無檔案類型字串，預設'無檔案類型'
+ * @param {String} [opt.textDownloadingFile='開始下載檔案'] 輸入提示開始下載檔案字串，預設'開始下載檔案'
+ * @param {String} [opt.textDownloadFileSuccessfully='下載檔案成功'] 輸入提示下載檔案成功字串，預設'下載檔案成功'
+ * @param {String} [opt.textDownloadFileFailed='下載檔案失敗'] 輸入提示下載檔案失敗字串，預設'下載檔案失敗'
+ * @returns {Object} 回傳各下載函數物件，包括'downloadPic','downloadTable','downloadLtdt','downloadFile'
+ * @example
+ *
+ * let WUiDownload = window['w-ui-download']
+ * // console.log(WUiDownload)
+ *
+ * //wuidw
+ * let vo = {
+ *     updateLoading: (v)=>{
+ *         console.log('updateLoading', v)
+ *     },
+ *     alert: (v, t)=>{
+ *         console.log('alert', v, t)
+ *     },
+ *     downloadFileById: ()=>{
+ *     },
+ * }
+ * let wuidw = WUiDownload(vo, {
+ *     keyFunDownloadFileById: 'downloadFileById',
+ *     keyFunUpdateLoading: 'updateLoading',
+ *     keyFunAlert: 'alert',
+ * })
+ * console.log(wuidw)
+ *
+ */
+function WUiDownload(vo, opt = {}) {
+
+    //keyFunDownloadFileById
+    let keyFunDownloadFileById = get(opt, 'keyFunDownloadFileById')
+    if (!isestr(keyFunDownloadFileById)) {
+        keyFunDownloadFileById = 'downloadFileById'
+    }
+
+    //keyFunUpdateLoading
+    let keyFunUpdateLoading = get(opt, 'keyFunUpdateLoading')
+    if (!isestr(keyFunUpdateLoading)) {
+        keyFunUpdateLoading = 'updateLoading'
+    }
+
+    //keyFunAlert
+    let keyFunAlert = get(opt, 'keyFunAlert')
+    if (!isestr(keyFunAlert)) {
+        keyFunAlert = 'alert'
+    }
+
+    //useBrowserView
+    let useBrowserView = get(opt, 'useBrowserView')
+    if (!isbol(useBrowserView)) {
+        useBrowserView = true
+    }
+
+    //browserViewTypes
+    let browserViewTypes = get(opt, 'browserViewTypes')
+    if (!isearr(browserViewTypes)) {
+        browserViewTypes = ['text/plain', 'application/rtf', 'application/json', 'text/csv', 'text/html', 'text/xml', 'application/xml', 'application/pdf', 'image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/bmp', 'image/svg+xml', 'image/webp', 'audio/mpeg', 'video/mpeg', 'video/mp4', 'video/webm']
+    }
+
+    //textErrorDownloadImage
+    let textErrorDownloadImage = get(opt, 'textErrorDownloadImage')
+    if (!isestr(textErrorDownloadImage)) {
+        textErrorDownloadImage = '無法下載圖片'
+        // textErrorDownloadImage = 'can not download image'
+    }
+
+    //textErrorDownloadTable
+    let textErrorDownloadTable = get(opt, 'textErrorDownloadTable')
+    if (!isestr(textErrorDownloadTable)) {
+        textErrorDownloadTable = '無法下載表格數據'
+        // textErrorDownloadTable = 'can not download table'
+    }
+
+    //textErrorDownloadLtdt
+    let textErrorDownloadLtdt = get(opt, 'textErrorDownloadLtdt')
+    if (!isestr(textErrorDownloadLtdt)) {
+        textErrorDownloadLtdt = '無法下載數據'
+        // textErrorDownloadLtdt = 'can not download data'
+    }
+
+    //textInvalidElePic
+    let textInvalidElePic = get(opt, 'textInvalidElePic')
+    if (!isestr(textInvalidElePic)) {
+        textInvalidElePic = 'elePic非元素'
+        // textInvalidElePic = 'invalid elePic'
+    }
+
+    //textInvalidEleName
+    let textInvalidEleName = get(opt, 'textInvalidEleName')
+    if (!isestr(textInvalidEleName)) {
+        textInvalidEleName = 'eleName非元素或字串'
+        // textInvalidEleName = 'invalid eleName'
+    }
+
+    //textInvalidEleTable
+    let textInvalidEleTable = get(opt, 'textInvalidEleTable')
+    if (!isestr(textInvalidEleTable)) {
+        textInvalidEleTable = 'eleTable非元素'
+        // textInvalidEleTable = 'invalid eleTable'
+    }
+
+    //textInvalidLtdt
+    let textInvalidLtdt = get(opt, 'textInvalidLtdt')
+    if (!isestr(textInvalidLtdt)) {
+        textInvalidLtdt = 'ltdt非陣列'
+        // textInvalidLtdt = 'ltdt is not an array'
+    }
+
+    //textInvalidFileId
+    let textInvalidFileId = get(opt, 'textInvalidFileId')
+    if (!isestr(textInvalidFileId)) {
+        textInvalidFileId = '無檔案主鍵'
+        // textInvalidFileId = 'invalid file ID'
+    }
+
+    //textInvalidFilename
+    let textInvalidFilename = get(opt, 'textInvalidFilename')
+    if (!isestr(textInvalidFilename)) {
+        textInvalidFilename = '無檔案名稱'
+        // textInvalidFilename = 'invalid filename'
+    }
+
+    //textInvalidFileU8a
+    let textInvalidFileU8a = get(opt, 'textInvalidFileU8a')
+    if (!isestr(textInvalidFileU8a)) {
+        textInvalidFileU8a = '無檔案內容'
+        // textInvalidFileU8a = 'invalid u8a'
+    }
+
+    //textInvalidFileType
+    let textInvalidFileType = get(opt, 'textInvalidFileType')
+    if (!isestr(textInvalidFileType)) {
+        textInvalidFileType = '無檔案類型'
+        // textInvalidFileType = 'invalid type'
+    }
+
+    //textDownloadingFile
+    let textDownloadingFile = get(opt, 'textDownloadingFile')
+    if (!isestr(textDownloadingFile)) {
+        textDownloadingFile = '開始下載檔案'
+        // textDownloadingFile = 'downloading file'
+    }
+
+    //textDownloadFileSuccessfully
+    let textDownloadFileSuccessfully = get(opt, 'textDownloadFileSuccessfully')
+    if (!isestr(textDownloadFileSuccessfully)) {
+        textDownloadFileSuccessfully = '下載檔案成功'
+        // textDownloadFileSuccessfully = 'download file successfully'
+    }
+
+    //textDownloadFileFailed
+    let textDownloadFileFailed = get(opt, 'textDownloadFileFailed')
+    if (!isestr(textDownloadFileFailed)) {
+        textDownloadFileFailed = '下載檔案失敗'
+        // textDownloadFileFailed = 'download file failed'
+    }
+
+    function downloadFileById() { //不能使用箭頭函數避免this與arguments指向原呼叫處
+        let func = get(vo, keyFunDownloadFileById)
+        if (isfun(func)) {
+            return func(...arguments)
+        }
+    }
+
+    function updateLoading() { //不能使用箭頭函數避免this與arguments指向原呼叫處
+        let func = get(vo, keyFunUpdateLoading)
+        if (isfun(func)) {
+            return func(...arguments)
+        }
+    }
+
+    function alert() { //不能使用箭頭函數避免this與arguments指向原呼叫處
+        let func = get(vo, keyFunAlert)
+        if (isfun(func)) {
+            return func(...arguments)
+        }
+    }
+
+    /**
+     * 前端將dom下載成為圖片
+     *
+     * @memberOf w-ui-download
+     * @param {HTMLElement} elePic 輸入圖片所在元素
+     * @param {HTMLElement|String} eleName 輸入圖名所在元素或圖名字串
+     * @param {Object} [opt={}] 輸入設定物件，預設{}
+     * @param {Number} [opt.scale=3] 輸入放大比率數字，代表反鋸齒(anti-aliasing)，預設3
+     * @param {Number} [opt.timeDelay=500] 輸入當使用updateLoading時，因畫面要渲染loading可能需延遲顯示才能看見動畫，故需給予延遲時間，單位ms，預設500
+     * @param {String} [opt.defName='pic'] 輸入若無有效圖名時預設名稱字串，預設'pic'
+     * @param {Boolean} [opt.useAlert=true] 輸入是否使用alert布林值，預設true
+     * @param {Boolean} [opt.useUpdateLoading=true] 輸入是否使用updateLoading布林值，預設true
+     * @returns {Promise} 回傳Promise，resolve代表執行結束，不會有reject，將由console.log或alert(若有)顯示發生之錯誤訊息
+     * @example
+     *
+     * let WUiDownload = window['w-ui-download']
+     * // console.log(WUiDownload)
+     *
+     * //wuidw
+     * let vo = {
+     *     updateLoading: (v)=>{
+     *         console.log('updateLoading', v)
+     *     },
+     *     alert: (v, t)=>{
+     *         console.log('alert', v, t)
+     *     },
+     *     downloadFileById: ()=>{
+     *     },
+     * }
+     * let wuidw = WUiDownload(vo, {
+     *     keyFunDownloadFileById: 'downloadFileById',
+     *     keyFunUpdateLoading: 'updateLoading',
+     *     keyFunAlert: 'alert',
+     * })
+     * console.log(wuidw)
+     *
+     * function dw(){
+     *     let eleTar = document.querySelector('#container')
+     *     let eleName = document.querySelector('#name')
+     *     wuidw.downloadPic(eleTar, eleName)
+     * }
+     *
+     */
+    async function downloadPic(elePic, eleName, opt = {}) {
+
+        //scale
+        let scale = get(opt, 'scale')
+        if (!isNumber(scale)) {
+            scale = 3
+        }
+
+        //timeDelay
+        let timeDelay = get(opt, 'timeDelay')
+        if (!isNumber(timeDelay)) {
+            timeDelay = 500
+        }
+
+        //defName
+        let defName = get(opt, 'defName')
+        if (!isestr(defName)) {
+            defName = 'pic'
+        }
+
+        //useAlert
+        let useAlert = get(opt, 'useAlert')
+        if (!isbol(useAlert)) {
+            useAlert = true
+        }
+
+        //useUpdateLoading
+        let useUpdateLoading = get(opt, 'useUpdateLoading')
+        if (!isbol(useUpdateLoading)) {
+            useUpdateLoading = true
+        }
+
+        async function core(elePic, eleName) {
+
+            //check
+            if (!isEle(elePic)) {
+                return Promise.reject(textInvalidElePic)
+            }
+            if (!isEle(eleName) &amp;&amp; !isestr(eleName)) {
+                return Promise.reject(textInvalidEleName)
+            }
+
+            //name
+            let name = ''
+            if (isEle(eleName)) {
+                name = get(eleName, 'innerText')
+            }
+            else {
+                name = eleName
+            }
+            if (!isestr(name)) {
+                name = defName
+            }
+
+            //fn
+            let fn = `${name}.png`
+
+            //add background, 預設無背景時產png會變成背景半透明, 出圖時強制預設為白色之後再復原
+            let c = elePic.style.background
+            if (c !== '#fff') {
+                elePic.style.background = '#fff'
+            }
+
+            //b64
+            //let b64 = await html2picDyn(elePic, { scale }) //無法支援大圖
+            let b64 = await domConvertToPicDyn(elePic, { scale }) //不支援IE11與Safari
+
+            //reset background
+            elePic.style.background = c
+
+            //downloadFileFromB64
+            downloadFileFromB64(fn, b64)
+
+        }
+
+        //useUpdateLoading
+        if (useUpdateLoading) {
+
+            //show loading
+            updateLoading(true)
+
+            //delay
+            await delay(timeDelay)
+
+        }
+
+        //core
+        await core(elePic, eleName)
+            .catch((err) => {
+                console.log(err)
+
+                //useAlert
+                if (useAlert) {
+                    alert(textErrorDownloadImage, { type: 'error' })
+                }
+
+            })
+            .finally(() => {
+
+                //useUpdateLoading
+                if (useUpdateLoading) {
+
+                    //hide loading
+                    updateLoading(false)
+
+                }
+
+            })
+
+    }
+
+    /**
+     * 前端將dom(table)內數據下載成為Excel檔(*.xlsx)
+     *
+     * @memberOf w-ui-download
+     * @param {HTMLElement} eleTable 輸入表格所在元素
+     * @param {HTMLElement|String} eleName 輸入表名所在元素或表名字串
+     * @param {Object} [opt={}] 輸入設定物件，預設{}
+     * @param {String} [opt.nameSheet='data'] 輸入sheet名稱字串，預設'data'
+     * @param {Number} [opt.timeDelay=500] 輸入當使用updateLoading時，因畫面要渲染loading可能需延遲顯示才能看見動畫，故需給予延遲時間，單位ms，預設500
+     * @param {String} [opt.defName='table'] 輸入若無有效表名時預設名稱字串，預設'table'
+     * @param {Boolean} [opt.useAlert=true] 輸入是否使用alert布林值，預設true
+     * @param {Boolean} [opt.useUpdateLoading=true] 輸入是否使用updateLoading布林值，預設true
+     * @returns {Promise} 回傳Promise，resolve代表執行結束，不會有reject，將由console.log或alert(若有)顯示發生之錯誤訊息
+     * @example
+     *
+     * let WUiDownload = window['w-ui-download']
+     * // console.log(WUiDownload)
+     *
+     * //wuidw
+     * let vo = {
+     *     updateLoading: (v)=>{
+     *         console.log('updateLoading', v)
+     *     },
+     *     alert: (v, t)=>{
+     *         console.log('alert', v, t)
+     *     },
+     *     downloadFileById: ()=>{
+     *     },
+     * }
+     * let wuidw = WUiDownload(vo, {
+     *     keyFunDownloadFileById: 'downloadFileById',
+     *     keyFunUpdateLoading: 'updateLoading',
+     *     keyFunAlert: 'alert',
+     * })
+     * console.log(wuidw)
+     *
+     * function dw(){
+     *     let eleTar = document.querySelector('#container')
+     *     let eleName = document.querySelector('#name')
+     *     wuidw.downloadTable(eleTar, eleName)
+     * }
+     *
+     */
+    async function downloadTable(eleTable, eleName, opt = {}) {
+
+        //nameSheet
+        let nameSheet = get(opt, 'nameSheet')
+        if (!isestr(nameSheet)) {
+            nameSheet = 'data'
+        }
+
+        //timeDelay
+        let timeDelay = get(opt, 'timeDelay')
+        if (!isNumber(timeDelay)) {
+            timeDelay = 500
+        }
+
+        //defName
+        let defName = get(opt, 'defName')
+        if (!isestr(defName)) {
+            defName = 'table'
+        }
+
+        //useAlert
+        let useAlert = get(opt, 'useAlert')
+        if (!isbol(useAlert)) {
+            useAlert = true
+        }
+
+        //useUpdateLoading
+        let useUpdateLoading = get(opt, 'useUpdateLoading')
+        if (!isbol(useUpdateLoading)) {
+            useUpdateLoading = true
+        }
+
+        async function core(eleTable, eleName) {
+
+            //check
+            if (!isEle(eleTable)) {
+                return Promise.reject(textInvalidEleTable)
+            }
+            if (!isEle(eleName) &amp;&amp; !isestr(eleName)) {
+                return Promise.reject(textInvalidEleName)
+            }
+
+            //name
+            let name = ''
+            if (isEle(eleName)) {
+                name = get(eleName, 'innerText')
+            }
+            else {
+                name = eleName
+            }
+            if (!isestr(name)) {
+                name = defName
+            }
+
+            //fn
+            let fn = `${name}.xlsx`
+
+            //downloadExcelFileFromDataDyn
+            await downloadExcelFileFromDataDyn(fn, nameSheet, eleTable)
+
+        }
+
+        //useUpdateLoading
+        if (useUpdateLoading) {
+
+            //show loading
+            updateLoading(true)
+
+            //delay
+            await delay(timeDelay)
+
+        }
+
+        //core
+        await core(eleTable, eleName)
+            .catch((err) => {
+                console.log(err)
+
+                //useAlert
+                if (useAlert) {
+                    alert(textErrorDownloadTable, { type: 'error' })
+                }
+
+            })
+            .finally(() => {
+
+                //useUpdateLoading
+                if (useUpdateLoading) {
+
+                    //hide loading
+                    updateLoading(false)
+
+                }
+
+            })
+
+    }
+
+    /**
+     * 前端將ltdt數據下載成為Excel檔(*.xlsx)
+     *
+     * @memberOf w-ui-download
+     * @param {Array} ltdt 輸入數據陣列
+     * @param {HTMLElement|String} eleName 輸入表名所在元素或表名字串
+     * @param {Object} [opt={}] 輸入設定物件，預設{}
+     * @param {String} [opt.nameSheet='data'] 輸入sheet名稱字串，預設'data'
+     * @param {Number} [opt.timeDelay=500] 輸入當使用updateLoading時，因畫面要渲染loading可能需延遲顯示才能看見動畫，故需給予延遲時間，單位ms，預設500
+     * @param {String} [opt.defName='table'] 輸入若無有效表名時預設名稱字串，預設'table'
+     * @param {Boolean} [opt.useAlert=true] 輸入是否使用alert布林值，預設true
+     * @param {Boolean} [opt.useUpdateLoading=true] 輸入是否使用updateLoading布林值，預設true
+     * @returns {Promise} 回傳Promise，resolve代表執行結束，不會有reject，將由console.log或alert(若有)顯示發生之錯誤訊息
+     * @example
+     *
+     * let WUiDownload = window['w-ui-download']
+     * // console.log(WUiDownload)
+     *
+     * let ltdt = [
+     *     {
+     *         "firstName": "John",
+     *         "lastName": "Smith",
+     *         "sex": "male",
+     *         "age(年齡)": 25,
+     *     },
+     *     {
+     *         "firstName": "Worthly",
+     *         "lastName": "Bill",
+     *         "sex": "female",
+     *         "age(年齡)": 22,
+     *     },
+     *     {
+     *         "firstName": "Sandola",
+     *         "lastName": "Dell",
+     *         "sex": "male",
+     *         "age(年齡)": 31,
+     *     },
+     * ]
+     *
+     * //wuidw
+     * let vo = {
+     *     updateLoading: (v)=>{
+     *         console.log('updateLoading', v)
+     *     },
+     *     alert: (v, t)=>{
+     *         console.log('alert', v, t)
+     *     },
+     *     downloadFileById: ()=>{
+     *     },
+     * }
+     * let wuidw = WUiDownload(vo, {
+     *     keyFunDownloadFileById: 'downloadFileById',
+     *     keyFunUpdateLoading: 'updateLoading',
+     *     keyFunAlert: 'alert',
+     * })
+     * console.log(wuidw)
+     *
+     * function dw(){
+     *     let eleName = document.querySelector('#name')
+     *     wuidw.downloadLtdt(ltdt, eleName)
+     *     // let name = 'ltdt-name'
+     *     // wuidw.downloadLtdt(ltdt, name)
+     * }
+     *
+     */
+    async function downloadLtdt(ltdt, eleName, opt = {}) {
+
+        //nameSheet
+        let nameSheet = get(opt, 'nameSheet')
+        if (!isestr(nameSheet)) {
+            nameSheet = 'data'
+        }
+
+        //timeDelay
+        let timeDelay = get(opt, 'timeDelay')
+        if (!isNumber(timeDelay)) {
+            timeDelay = 500
+        }
+
+        //defName
+        let defName = get(opt, 'defName')
+        if (!isestr(defName)) {
+            defName = 'table'
+        }
+
+        //useAlert
+        let useAlert = get(opt, 'useAlert')
+        if (!isbol(useAlert)) {
+            useAlert = true
+        }
+
+        //useUpdateLoading
+        let useUpdateLoading = get(opt, 'useUpdateLoading')
+        if (!isbol(useUpdateLoading)) {
+            useUpdateLoading = true
+        }
+
+        async function core(ltdt, eleName) {
+
+            //check
+            if (!isarr(ltdt)) {
+                return Promise.reject(textInvalidLtdt)
+            }
+            if (!isEle(eleName) &amp;&amp; !isestr(eleName)) {
+                return Promise.reject(textInvalidEleName)
+            }
+
+            //name
+            let name = ''
+            if (isEle(eleName)) {
+                name = get(eleName, 'innerText')
+            }
+            else {
+                name = eleName
+            }
+            if (!isestr(name)) {
+                name = defName
+            }
+
+            //fn
+            let fn = `${name}.xlsx`
+
+            //ltdtkeysheads2mat
+            let mat = ltdtkeysheads2mat(ltdt)
+
+            //downloadExcelFileFromDataDyn
+            await downloadExcelFileFromDataDyn(fn, nameSheet, mat)
+
+        }
+
+        //useUpdateLoading
+        if (useUpdateLoading) {
+
+            //show loading
+            updateLoading(true)
+
+            //delay
+            await delay(timeDelay)
+
+        }
+
+        //core
+        await core(ltdt, eleName)
+            .catch((err) => {
+                console.log(err)
+
+                //useAlert
+                if (useAlert) {
+                    alert(textErrorDownloadLtdt, { type: 'error' })
+                }
+
+            })
+            .finally(() => {
+
+                //useUpdateLoading
+                if (useUpdateLoading) {
+
+                    //hide loading
+                    updateLoading(false)
+
+                }
+
+            })
+
+    }
+
+    /**
+     * 前端呼叫函數(前後端)下載檔案
+     *
+     * @memberOf w-ui-download
+     * @param {Object} file 輸入檔案資料物件，至少需有id欄位
+     * @param {Function} setProg 輸入下載階段調用提供進度函數，需建構並由按鈕或進度視窗提供
+     * @param {Object} [opt={}] 輸入設定物件，預設{}
+     * @param {Number} [opt.timeDelay=500] 輸入當使用updateLoading時，因畫面要渲染loading可能需延遲顯示才能看見動畫，故需給予延遲時間，單位ms，預設500
+     * @param {Boolean} [opt.useAlert=true] 輸入是否使用alert布林值，預設true
+     * @param {Boolean} [opt.useUpdateLoading=true] 輸入是否使用updateLoading布林值，預設true
+     * @returns {Promise} 回傳Promise，resolve代表執行結束，不會有reject，將由console.log或alert(若有)顯示發生之錯誤訊息
+     * @example
+     *
+     * let WUiDownload = window['w-ui-download']
+     * // console.log(WUiDownload)
+     *
+     * let file = {
+     *     'id': 'id-for-file',
+     * }
+     *
+     * //wuidw
+     * let vo = {
+     *     updateLoading: (v)=>{
+     *         console.log('updateLoading', v)
+     *     },
+     *     alert: (v, t)=>{
+     *         console.log('alert', v, t)
+     *     },
+     *     downloadFileById: (fileId)=>{
+     *         //記得添加BOM
+     *         let u8a = wsemi.str2u8arr(`\ufeff中文測試
+     * Plain text, unformatted text
+     * Text file, a type of computer file opened by most text software
+     * Text string, a sequence of characters manipulated by software
+     * Text message, a short electronic message designed for communication between mobile phone users
+     * Text (Chrome app), a text editor for the Google Chrome web browser`)
+     *         return {
+     *             fileName:'name-for-file',
+     *             u8a,
+     *             type:'text/plain',
+     *         }
+     *     },
+     * }
+     * let wuidw = WUiDownload(vo, {
+     *     keyFunDownloadFileById: 'downloadFileById',
+     *     keyFunUpdateLoading: 'updateLoading',
+     *     keyFunAlert: 'alert',
+     * })
+     * console.log(wuidw)
+     *
+     * function dw(){
+     *     wuidw.downloadFile(file)
+     * }
+     *
+     */
+    async function downloadFile(file, setProg = null, opt = {}) {
+        //file內至少需要id, 回傳至少需要fileName,u8a,type, setProg為下載進度通知函數可不給
+
+        //timeDelay
+        let timeDelay = get(opt, 'timeDelay')
+        if (!isNumber(timeDelay)) {
+            timeDelay = 500
+        }
+
+        //useAlert
+        let useAlert = get(opt, 'useAlert')
+        if (!isbol(useAlert)) {
+            useAlert = true
+        }
+
+        //useUpdateLoading
+        let useUpdateLoading = get(opt, 'useUpdateLoading')
+        if (!isbol(useUpdateLoading)) {
+            useUpdateLoading = false //可使用呼叫處的顯示下載機制, 例如按鈕的setProg, 故預設false
+        }
+
+        async function core() {
+
+            //lock, 因呼叫api有時間差會給使用者重複點擊的機會, 得先設定prog為0使按鈕自動上鎖
+            if (isfun(setProg)) {
+                setProg(0)
+            }
+
+            //fileId
+            let fileId = get(file, 'id')
+
+            //check
+            if (!isestr(fileId)) {
+                console.log(textInvalidFileId, file)
+                return Promise.reject(textInvalidFileId)
+            }
+
+            //downloadFileById
+            let r = downloadFileById(fileId, ({ prog, p, m }) => {
+                //console.log('downloadFileById', prog, p, m)
+                if (m === 'download') {
+                    if (isfun(setProg)) {
+                        setProg(prog)
+                    }
+                }
+            })
+            if (ispm(r)) {
+                r = await r
+            }
+
+            //fileName
+            let fileName = get(r, 'fileName')
+
+            //check
+            if (!isestr(fileName)) {
+                console.log(textInvalidFilename, r)
+                return Promise.reject(textInvalidFilename)
+            }
+
+            //u8a
+            let u8a = get(r, 'u8a')
+
+            //check
+            if (!isu8arr(u8a)) {
+                console.log(textInvalidFileU8a, r)
+                return Promise.reject(textInvalidFileU8a)
+            }
+
+            //downloadFileFromU8Arr
+            downloadFileFromU8Arr(fileName, u8a)
+
+            //useBrowserView
+            if (useBrowserView) {
+                //chrome無法瀏覽: 'image/tiff', [avi]'video/x-msvideo', 'video/ogg', 'video/avi', [ts]'video/mp2t', [3gp]'video/3gpp', [3g2]'video/3gpp2'
+
+                //type
+                let type = get(r, 'type')
+
+                //check type
+                if (!isestr(type)) {
+                    console.log(textInvalidFileType, r)
+                    return Promise.reject(textInvalidFileType)
+                }
+
+                //check browserViewTypes
+                if (arrHas(type, browserViewTypes)) {
+
+                    //browserView
+                    browserView(u8a, type)
+
+                }
+            }
+
+
+        }
+
+        //useAlert
+        if (useAlert) {
+            alert(`${textDownloadingFile}: ${file.fileName}`, { type: 'infor' })
+        }
+
+        //useUpdateLoading
+        if (useUpdateLoading) {
+
+            //show loading
+            updateLoading(true)
+
+            //delay
+            await delay(timeDelay)
+
+        }
+
+        //core
+        await core()
+            .then(() => {
+
+                //useAlert
+                if (useAlert) {
+                    alert(`${textDownloadFileSuccessfully}: ${file.name}`)
+                }
+
+            })
+            .catch((err) => {
+                console.log(err)
+
+                //useAlert
+                if (useAlert) {
+                    alert(`${textDownloadFileFailed}: ${file.name}`, { type: 'error' })
+                }
+
+            })
+            .finally(() => {
+
+                //unlock
+                if (isfun(setProg)) {
+                    setProg(null)
+                }
+
+                //useUpdateLoading
+                if (useUpdateLoading) {
+
+                    //hide loading
+                    updateLoading(false)
+
+                }
+
+            })
+
+    }
+
+    return {
+        downloadPic,
+        downloadTable,
+        downloadLtdt,
+        downloadFile,
+    }
+}
+
+
+export default WUiDownload
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Wed Mar 09 2022 17:08:34 GMT+0800 (台北標準時間) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

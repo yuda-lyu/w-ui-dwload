@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-tw">
+
+    <head>
+        <meta http-equiv="content-type" content="text/html charset=UTF-8" />
+        <title>downloadTable</title>
+
+        <!-- @babel/polyfill已廢棄 -->
+        <script nomodule src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/wsemi/dist/wsemi.umd.js"></script>
+    
+        <script src="https://cdn.jsdelivr.net/npm/w-ui-download@1.0.0/dist/w-ui-download.umd.js"></script>
+
+    </head>
+
+    <body>
+
+        <div style="padding:10px;">
+            <button onclick="dw()">download</button>
+        </div>
+
+        <script>
+
+            let WUiDownload = window['w-ui-download']
+            // console.log(WUiDownload)
+
+            //wuidw
+            let vo = {
+                updateLoading: (v)=>{
+                    console.log('updateLoading', v)
+                },
+                alert: (v, t)=>{
+                    console.log('alert', v, t)
+                },
+                downloadFileById: ()=>{
+                },
+            }
+            let wuidw = WUiDownload(vo, {
+                keyFunDownloadFileById: 'downloadFileById',
+                keyFunUpdateLoading: 'updateLoading',
+                keyFunAlert: 'alert',
+            })
+            console.log(wuidw)
+
+            function dw(){
+                let eleTar = document.querySelector('#container')
+                let eleName = document.querySelector('#name')
+                wuidw.downloadTable(eleTar, eleName)
+            }
+
+        </script>
+
+        <div id="name">table-name</div>
+        <table id="container" style="border:1px solid #333;">
+            <tbody>
+                <tr>
+                    <th style="border:1px solid #aaa;">Head(標題)1</th>
+                    <th style="border:1px solid #aaa;">Head(標題)2</th>
+                    <th style="border:1px solid #aaa;">Head(標題)3</th>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #aaa;">Cell(儲存格)1A</td>
+                    <td style="border:1px solid #aaa;">Cell(儲存格)1B</td>
+                    <td style="border:1px solid #aaa;">Cell(儲存格)1C</td>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #aaa;">Cell(儲存格)2A</td>
+                    <td style="border:1px solid #aaa;">Cell(儲存格)2B</td>
+                    <td style="border:1px solid #aaa;">Cell(儲存格)2C</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>
+
+</html>

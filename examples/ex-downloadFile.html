@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-tw">
+
+    <head>
+        <meta http-equiv="content-type" content="text/html charset=UTF-8" />
+        <title>downloadFile</title>
+
+        <!-- @babel/polyfill已廢棄 -->
+        <script nomodule src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/wsemi/dist/wsemi.umd.js"></script>
+    
+        <script src="https://cdn.jsdelivr.net/npm/w-ui-download@1.0.0/dist/w-ui-download.umd.js"></script>
+
+    </head>
+
+    <body>
+
+        <div style="padding:10px;">
+            <button onclick="dw()">download</button>
+        </div>
+
+        <script>
+            
+            let WUiDownload = window['w-ui-download']
+            // console.log(WUiDownload)
+
+            let file = {
+                'id': 'id-for-file',
+            }
+        
+            //wuidw
+            let vo = {
+                updateLoading: (v)=>{
+                    console.log('updateLoading', v)
+                },
+                alert: (v, t)=>{
+                    console.log('alert', v, t)
+                },
+                downloadFileById: (fileId)=>{
+                    //記得添加BOM
+                    let u8a = wsemi.str2u8arr(`\ufeff中文測試
+Plain text, unformatted text
+Text file, a type of computer file opened by most text software
+Text string, a sequence of characters manipulated by software
+Text message, a short electronic message designed for communication between mobile phone users
+Text (Chrome app), a text editor for the Google Chrome web browser`)
+                    return {
+                        fileName:'name-for-file',
+                        u8a,
+                        type:'text/plain',
+                    }
+                },
+            }
+            let wuidw = WUiDownload(vo, {
+                keyFunDownloadFileById: 'downloadFileById',
+                keyFunUpdateLoading: 'updateLoading',
+                keyFunAlert: 'alert',
+            })
+            console.log(wuidw)
+
+            function dw(){
+                wuidw.downloadFile(file)
+            }
+
+        </script>
+
+        <pre id="container" style="border:1px solid #333;"></pre>
+
+        <script>
+            let eleTar = document.querySelector('#container')
+            eleTar.innerHTML = JSON.stringify(file, null, 2)
+        </script>
+
+    </body>
+
+</html>
