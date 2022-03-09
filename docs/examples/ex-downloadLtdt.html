@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-tw">
+
+    <head>
+        <meta http-equiv="content-type" content="text/html charset=UTF-8" />
+        <title>downloadLtdt</title>
+
+        <!-- @babel/polyfill已廢棄 -->
+        <script nomodule src="https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/wsemi/dist/wsemi.umd.js"></script>
+    
+        <script src="https://cdn.jsdelivr.net/npm/w-ui-download@1.0.0/dist/w-ui-download.umd.js"></script>
+
+    </head>
+
+    <body>
+
+        <div style="padding:10px;">
+            <button onclick="dw()">download</button>
+        </div>
+
+        <script>
+
+            let WUiDownload = window['w-ui-download']
+            // console.log(WUiDownload)
+
+            let ltdt = [
+                {
+                    "firstName": "John",
+                    "lastName": "Smith",
+                    "sex": "male",
+                    "age(年齡)": 25,
+                },
+                {
+                    "firstName": "Worthly",
+                    "lastName": "Bill",
+                    "sex": "female",
+                    "age(年齡)": 22,
+                },
+                {
+                    "firstName": "Sandola",
+                    "lastName": "Dell",
+                    "sex": "male",
+                    "age(年齡)": 31,
+                },
+            ]
+            
+            //wuidw
+            let vo = {
+                updateLoading: (v)=>{
+                    console.log('updateLoading', v)
+                },
+                alert: (v, t)=>{
+                    console.log('alert', v, t)
+                },
+                downloadFileById: ()=>{
+                },
+            }
+            let wuidw = WUiDownload(vo, {
+                keyFunDownloadFileById: 'downloadFileById',
+                keyFunUpdateLoading: 'updateLoading',
+                keyFunAlert: 'alert',
+            })
+            console.log(wuidw)
+
+            function dw(){
+                let eleName = document.querySelector('#name')
+                wuidw.downloadLtdt(ltdt, eleName)
+                // let name = 'ltdt-name'
+                // wuidw.downloadLtdt(ltdt, name)
+            }
+
+        </script>
+
+        <div id="name">ltdt-name</div>
+        <pre id="container" style="border:1px solid #333;"></pre>
+
+        <script>
+            let eleTar = document.querySelector('#container')
+            eleTar.innerHTML = JSON.stringify(ltdt, null, 2)
+        </script>
+
+    </body>
+
+</html>

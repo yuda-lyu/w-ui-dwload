@@ -1,0 +1,33 @@
+{
+  "name": "w-ui-download",
+  "version": "1.0.0",
+  "description": "A tool of download in browser.",
+  "main": "dist/w-ui-download.umd.js",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "wsemi": "^1.6.47"
+  },
+  "devDependencies": {
+    "w-package-tools": "^1.0.61"
+  },
+  "scripts": {
+    "test": "mocha --parallel --timeout 60000 --experimental-modules --es-module-specifier-resolution=node",
+    "deploy": "gh-pages -d docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuda-lyu/w-ui-download.git"
+  },
+  "keywords": [
+    "package",
+    "tool",
+    "download",
+    "browser"
+  ],
+  "author": "yuda-lyu(semisphere)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yuda-lyu/w-ui-download/issues"
+  },
+  "homepage": "https://github.com/yuda-lyu/w-ui-download#readme"
+}
