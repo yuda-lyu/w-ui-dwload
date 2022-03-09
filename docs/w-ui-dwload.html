@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>w-ui-download - Documentation</title>
+    <title>w-ui-dwload - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -27,12 +27,12 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="w-ui-download.html">w-ui-download</a><ul class='methods'><li data-type='method'><a href="w-ui-download.html#.downloadFile">downloadFile</a></li><li data-type='method'><a href="w-ui-download.html#.downloadLtdt">downloadLtdt</a></li><li data-type='method'><a href="w-ui-download.html#.downloadPic">downloadPic</a></li><li data-type='method'><a href="w-ui-download.html#.downloadTable">downloadTable</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="w-ui-dwload.html">w-ui-dwload</a><ul class='methods'><li data-type='method'><a href="w-ui-dwload.html#.downloadFile">downloadFile</a></li><li data-type='method'><a href="w-ui-dwload.html#.downloadLtdt">downloadLtdt</a></li><li data-type='method'><a href="w-ui-dwload.html#.downloadPic">downloadPic</a></li><li data-type='method'><a href="w-ui-dwload.html#.downloadTable">downloadTable</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
     
-    <h1 class="page-title">w-ui-download</h1>
+    <h1 class="page-title">w-ui-dwload</h1>
     
 
     
@@ -45,7 +45,7 @@
 <header>
     
         <h2>
-        w-ui-download
+        w-ui-dwload
         </h2>
         
     
@@ -59,7 +59,7 @@
 
     
 
-    <h4 class="name" id="w-ui-download"><span class="type-signature"></span>new w-ui-download<span class="signature">(vo, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="w-ui-dwload"><span class="type-signature"></span>new w-ui-dwload<span class="signature">(vo, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -71,7 +71,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WUiDownload.mjs.html">WUiDownload.mjs</a>, <a href="WUiDownload.mjs.html#line21">line 21</a>
+        <a href="WUiDwload.mjs.html">WUiDwload.mjs</a>, <a href="WUiDwload.mjs.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -124,7 +124,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>let WUiDownload = window['w-ui-download']// console.log(WUiDownload)//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDownload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)</code></pre>
+    <pre class="prettyprint"><code>let WUiDwload = window['w-ui-dwload']// console.log(WUiDwload)//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDwload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)</code></pre>
 
 
 
@@ -1081,7 +1081,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WUiDownload.mjs.html">WUiDownload.mjs</a>, <a href="WUiDownload.mjs.html#line738">line 738</a>
+        <a href="WUiDwload.mjs.html">WUiDwload.mjs</a>, <a href="WUiDwload.mjs.html#line738">line 738</a>
     </li></ul></dd>
     
 
@@ -1134,7 +1134,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>let WUiDownload = window['w-ui-download']// console.log(WUiDownload)let file = {    'id': 'id-for-file',}//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: (fileId)=>{        //記得添加BOM        let u8a = wsemi.str2u8arr(`\ufeff中文測試Plain text, unformatted textText file, a type of computer file opened by most text softwareText string, a sequence of characters manipulated by softwareText message, a short electronic message designed for communication between mobile phone usersText (Chrome app), a text editor for the Google Chrome web browser`)        return {            fileName:'name-for-file',            u8a,            type:'text/plain',        }    },}let wuidw = WUiDownload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    wuidw.downloadFile(file)}</code></pre>
+    <pre class="prettyprint"><code>let WUiDwload = window['w-ui-dwload']// console.log(WUiDwload)let file = {    'id': 'id-for-file',}//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: (fileId)=>{        //記得添加BOM        let u8a = wsemi.str2u8arr(`\ufeff中文測試Plain text, unformatted textText file, a type of computer file opened by most text softwareText string, a sequence of characters manipulated by softwareText message, a short electronic message designed for communication between mobile phone usersText (Chrome app), a text editor for the Google Chrome web browser`)        return {            fileName:'name-for-file',            u8a,            type:'text/plain',        }    },}let wuidw = WUiDwload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    wuidw.downloadFile(file)}</code></pre>
 
 
 
@@ -1483,7 +1483,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WUiDownload.mjs.html">WUiDownload.mjs</a>, <a href="WUiDownload.mjs.html#line582">line 582</a>
+        <a href="WUiDwload.mjs.html">WUiDwload.mjs</a>, <a href="WUiDwload.mjs.html#line582">line 582</a>
     </li></ul></dd>
     
 
@@ -1536,7 +1536,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>let WUiDownload = window['w-ui-download']// console.log(WUiDownload)let ltdt = [    {        "firstName": "John",        "lastName": "Smith",        "sex": "male",        "age(年齡)": 25,    },    {        "firstName": "Worthly",        "lastName": "Bill",        "sex": "female",        "age(年齡)": 22,    },    {        "firstName": "Sandola",        "lastName": "Dell",        "sex": "male",        "age(年齡)": 31,    },]//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDownload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    let eleName = document.querySelector('#name')    wuidw.downloadLtdt(ltdt, eleName)    // let name = 'ltdt-name'    // wuidw.downloadLtdt(ltdt, name)}</code></pre>
+    <pre class="prettyprint"><code>let WUiDwload = window['w-ui-dwload']// console.log(WUiDwload)let ltdt = [    {        "firstName": "John",        "lastName": "Smith",        "sex": "male",        "age(年齡)": 25,    },    {        "firstName": "Worthly",        "lastName": "Bill",        "sex": "female",        "age(年齡)": 22,    },    {        "firstName": "Sandola",        "lastName": "Dell",        "sex": "male",        "age(年齡)": 31,    },]//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDwload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    let eleName = document.querySelector('#name')    wuidw.downloadLtdt(ltdt, eleName)    // let name = 'ltdt-name'    // wuidw.downloadLtdt(ltdt, name)}</code></pre>
 
 
 
@@ -1964,7 +1964,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WUiDownload.mjs.html">WUiDownload.mjs</a>, <a href="WUiDownload.mjs.html#line265">line 265</a>
+        <a href="WUiDwload.mjs.html">WUiDwload.mjs</a>, <a href="WUiDwload.mjs.html#line265">line 265</a>
     </li></ul></dd>
     
 
@@ -2017,7 +2017,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>let WUiDownload = window['w-ui-download']// console.log(WUiDownload)//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDownload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    let eleTar = document.querySelector('#container')    let eleName = document.querySelector('#name')    wuidw.downloadPic(eleTar, eleName)}</code></pre>
+    <pre class="prettyprint"><code>let WUiDwload = window['w-ui-dwload']// console.log(WUiDwload)//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDwload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    let eleTar = document.querySelector('#container')    let eleName = document.querySelector('#name')    wuidw.downloadPic(eleTar, eleName)}</code></pre>
 
 
 
@@ -2445,7 +2445,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="WUiDownload.mjs.html">WUiDownload.mjs</a>, <a href="WUiDownload.mjs.html#line419">line 419</a>
+        <a href="WUiDwload.mjs.html">WUiDwload.mjs</a>, <a href="WUiDwload.mjs.html#line419">line 419</a>
     </li></ul></dd>
     
 
@@ -2498,7 +2498,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>let WUiDownload = window['w-ui-download']// console.log(WUiDownload)//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDownload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    let eleTar = document.querySelector('#container')    let eleName = document.querySelector('#name')    wuidw.downloadTable(eleTar, eleName)}</code></pre>
+    <pre class="prettyprint"><code>let WUiDwload = window['w-ui-dwload']// console.log(WUiDwload)//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDwload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    let eleTar = document.querySelector('#container')    let eleName = document.querySelector('#name')    wuidw.downloadTable(eleTar, eleName)}</code></pre>
 
 
 
@@ -2929,7 +2929,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Wed Mar 09 2022 17:08:34 GMT+0800 (台北標準時間) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Wed Mar 09 2022 17:24:08 GMT+0800 (台北標準時間) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

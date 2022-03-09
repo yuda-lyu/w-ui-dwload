@@ -15,7 +15,7 @@ function main() {
     let pks = getPks()
 
     //url
-    let url = `https://cdn.jsdelivr.net/npm/w-ui-download@${pks.version}/dist/w-ui-download.umd.js`
+    let url = `https://cdn.jsdelivr.net/npm/w-ui-dwload@${pks.version}/dist/w-ui-dwload.umd.js`
 
     //mkdirSync
     if (!fs.existsSync(fdTar)) {
@@ -35,7 +35,7 @@ function main() {
 
         //replace
         let r
-        r = `../dist/w-ui-download.umd.js`
+        r = `../dist/w-ui-dwload.umd.js`
         c = c.replace(r, url)
 
         //write

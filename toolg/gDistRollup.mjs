@@ -5,7 +5,7 @@ let fdSrc = './src'
 let fdTar = './dist'
 
 rollupFiles({ //rollupFiles預設會clean folder
-    fns: 'WUiDownload.mjs',
+    fns: 'WUiDwload.mjs',
     fdSrc,
     fdTar,
     nameDistType: 'kebabCase',

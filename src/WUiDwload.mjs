@@ -21,7 +21,7 @@ import downloadFileFromU8Arr from 'wsemi/src/downloadFileFromU8Arr.mjs'
 /**
  * 前端UI下載套件
  *
- * @class w-ui-download
+ * @class w-ui-dwload
  * @param {Object} vo 輸入前端共用操作物件，也就是掛載共用函數之處，例如Vue.prototype
  * @param {Object} [opt={}] 輸入設定物件，預設{}
  * @param {String} [opt.keyFunDownloadFileById='downloadFileById'] 輸入於vo內掛載下載檔案函數(downloadFileById)之鍵值字串，預設'downloadFileById'
@@ -46,8 +46,8 @@ import downloadFileFromU8Arr from 'wsemi/src/downloadFileFromU8Arr.mjs'
  * @returns {Object} 回傳各下載函數物件，包括'downloadPic','downloadTable','downloadLtdt','downloadFile'
  * @example
  *
- * let WUiDownload = window['w-ui-download']
- * // console.log(WUiDownload)
+ * let WUiDwload = window['w-ui-dwload']
+ * // console.log(WUiDwload)
  *
  * //wuidw
  * let vo = {
@@ -60,7 +60,7 @@ import downloadFileFromU8Arr from 'wsemi/src/downloadFileFromU8Arr.mjs'
  *     downloadFileById: ()=>{
  *     },
  * }
- * let wuidw = WUiDownload(vo, {
+ * let wuidw = WUiDwload(vo, {
  *     keyFunDownloadFileById: 'downloadFileById',
  *     keyFunUpdateLoading: 'updateLoading',
  *     keyFunAlert: 'alert',
@@ -68,7 +68,7 @@ import downloadFileFromU8Arr from 'wsemi/src/downloadFileFromU8Arr.mjs'
  * console.log(wuidw)
  *
  */
-function WUiDownload(vo, opt = {}) {
+function WUiDwload(vo, opt = {}) {
 
     //keyFunDownloadFileById
     let keyFunDownloadFileById = get(opt, 'keyFunDownloadFileById')
@@ -222,7 +222,7 @@ function WUiDownload(vo, opt = {}) {
     /**
      * 前端將dom下載成為圖片
      *
-     * @memberOf w-ui-download
+     * @memberOf w-ui-dwload
      * @param {HTMLElement} elePic 輸入圖片所在元素
      * @param {HTMLElement|String} eleName 輸入圖名所在元素或圖名字串
      * @param {Object} [opt={}] 輸入設定物件，預設{}
@@ -234,8 +234,8 @@ function WUiDownload(vo, opt = {}) {
      * @returns {Promise} 回傳Promise，resolve代表執行結束，不會有reject，將由console.log或alert(若有)顯示發生之錯誤訊息
      * @example
      *
-     * let WUiDownload = window['w-ui-download']
-     * // console.log(WUiDownload)
+     * let WUiDwload = window['w-ui-dwload']
+     * // console.log(WUiDwload)
      *
      * //wuidw
      * let vo = {
@@ -248,7 +248,7 @@ function WUiDownload(vo, opt = {}) {
      *     downloadFileById: ()=>{
      *     },
      * }
-     * let wuidw = WUiDownload(vo, {
+     * let wuidw = WUiDwload(vo, {
      *     keyFunDownloadFileById: 'downloadFileById',
      *     keyFunUpdateLoading: 'updateLoading',
      *     keyFunAlert: 'alert',
@@ -376,7 +376,7 @@ function WUiDownload(vo, opt = {}) {
     /**
      * 前端將dom(table)內數據下載成為Excel檔(*.xlsx)
      *
-     * @memberOf w-ui-download
+     * @memberOf w-ui-dwload
      * @param {HTMLElement} eleTable 輸入表格所在元素
      * @param {HTMLElement|String} eleName 輸入表名所在元素或表名字串
      * @param {Object} [opt={}] 輸入設定物件，預設{}
@@ -388,8 +388,8 @@ function WUiDownload(vo, opt = {}) {
      * @returns {Promise} 回傳Promise，resolve代表執行結束，不會有reject，將由console.log或alert(若有)顯示發生之錯誤訊息
      * @example
      *
-     * let WUiDownload = window['w-ui-download']
-     * // console.log(WUiDownload)
+     * let WUiDwload = window['w-ui-dwload']
+     * // console.log(WUiDwload)
      *
      * //wuidw
      * let vo = {
@@ -402,7 +402,7 @@ function WUiDownload(vo, opt = {}) {
      *     downloadFileById: ()=>{
      *     },
      * }
-     * let wuidw = WUiDownload(vo, {
+     * let wuidw = WUiDwload(vo, {
      *     keyFunDownloadFileById: 'downloadFileById',
      *     keyFunUpdateLoading: 'updateLoading',
      *     keyFunAlert: 'alert',
@@ -517,7 +517,7 @@ function WUiDownload(vo, opt = {}) {
     /**
      * 前端將ltdt數據下載成為Excel檔(*.xlsx)
      *
-     * @memberOf w-ui-download
+     * @memberOf w-ui-dwload
      * @param {Array} ltdt 輸入數據陣列
      * @param {HTMLElement|String} eleName 輸入表名所在元素或表名字串
      * @param {Object} [opt={}] 輸入設定物件，預設{}
@@ -529,8 +529,8 @@ function WUiDownload(vo, opt = {}) {
      * @returns {Promise} 回傳Promise，resolve代表執行結束，不會有reject，將由console.log或alert(若有)顯示發生之錯誤訊息
      * @example
      *
-     * let WUiDownload = window['w-ui-download']
-     * // console.log(WUiDownload)
+     * let WUiDwload = window['w-ui-dwload']
+     * // console.log(WUiDwload)
      *
      * let ltdt = [
      *     {
@@ -564,7 +564,7 @@ function WUiDownload(vo, opt = {}) {
      *     downloadFileById: ()=>{
      *     },
      * }
-     * let wuidw = WUiDownload(vo, {
+     * let wuidw = WUiDwload(vo, {
      *     keyFunDownloadFileById: 'downloadFileById',
      *     keyFunUpdateLoading: 'updateLoading',
      *     keyFunAlert: 'alert',
@@ -683,7 +683,7 @@ function WUiDownload(vo, opt = {}) {
     /**
      * 前端呼叫函數(前後端)下載檔案
      *
-     * @memberOf w-ui-download
+     * @memberOf w-ui-dwload
      * @param {Object} file 輸入檔案資料物件，至少需有id欄位
      * @param {Function} setProg 輸入下載階段調用提供進度函數，需建構並由按鈕或進度視窗提供
      * @param {Object} [opt={}] 輸入設定物件，預設{}
@@ -693,8 +693,8 @@ function WUiDownload(vo, opt = {}) {
      * @returns {Promise} 回傳Promise，resolve代表執行結束，不會有reject，將由console.log或alert(若有)顯示發生之錯誤訊息
      * @example
      *
-     * let WUiDownload = window['w-ui-download']
-     * // console.log(WUiDownload)
+     * let WUiDwload = window['w-ui-dwload']
+     * // console.log(WUiDwload)
      *
      * let file = {
      *     'id': 'id-for-file',
@@ -723,7 +723,7 @@ function WUiDownload(vo, opt = {}) {
      *         }
      *     },
      * }
-     * let wuidw = WUiDownload(vo, {
+     * let wuidw = WUiDwload(vo, {
      *     keyFunDownloadFileById: 'downloadFileById',
      *     keyFunUpdateLoading: 'updateLoading',
      *     keyFunAlert: 'alert',
@@ -894,4 +894,4 @@ function WUiDownload(vo, opt = {}) {
 }
 
 
-export default WUiDownload
+export default WUiDwload

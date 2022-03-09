@@ -1,8 +1,8 @@
 {
-  "name": "w-ui-download",
+  "name": "w-ui-dwload",
   "version": "1.0.0",
   "description": "A tool of download in browser.",
-  "main": "dist/w-ui-download.umd.js",
+  "main": "dist/w-ui-dwload.umd.js",
   "dependencies": {
     "lodash": "^4.17.21",
     "wsemi": "^1.6.47"
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yuda-lyu/w-ui-download.git"
+    "url": "git+https://github.com/yuda-lyu/w-ui-dwload.git"
   },
   "keywords": [
     "package",
@@ -27,7 +27,7 @@
   "author": "yuda-lyu(semisphere)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yuda-lyu/w-ui-download/issues"
+    "url": "https://github.com/yuda-lyu/w-ui-dwload/issues"
   },
-  "homepage": "https://github.com/yuda-lyu/w-ui-download#readme"
+  "homepage": "https://github.com/yuda-lyu/w-ui-dwload#readme"
 }

@@ -10,7 +10,7 @@
         
         <script src="https://cdn.jsdelivr.net/npm/wsemi/dist/wsemi.umd.js"></script>
     
-        <script src="https://cdn.jsdelivr.net/npm/w-ui-download@1.0.0/dist/w-ui-download.umd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/w-ui-dwload@1.0.0/dist/w-ui-dwload.umd.js"></script>
 
     </head>
 
@@ -22,8 +22,8 @@
 
         <script>
             
-            let WUiDownload = window['w-ui-download']
-            // console.log(WUiDownload)
+            let WUiDwload = window['w-ui-dwload']
+            // console.log(WUiDwload)
 
             let file = {
                 'id': 'id-for-file',
@@ -52,7 +52,7 @@ Text (Chrome app), a text editor for the Google Chrome web browser`)
                     }
                 },
             }
-            let wuidw = WUiDownload(vo, {
+            let wuidw = WUiDwload(vo, {
                 keyFunDownloadFileById: 'downloadFileById',
                 keyFunUpdateLoading: 'updateLoading',
                 keyFunAlert: 'alert',
