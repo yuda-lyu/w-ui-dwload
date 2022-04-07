@@ -1,14 +1,14 @@
 {
   "name": "w-ui-dwload",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A tool of download in browser.",
   "main": "dist/w-ui-dwload.umd.js",
   "dependencies": {
     "lodash": "^4.17.21",
-    "wsemi": "^1.6.47"
+    "wsemi": "^1.6.54"
   },
   "devDependencies": {
-    "w-package-tools": "^1.0.61"
+    "w-package-tools": "^1.0.65"
   },
   "scripts": {
     "test": "mocha --parallel --timeout 60000 --experimental-modules --es-module-specifier-resolution=node",
