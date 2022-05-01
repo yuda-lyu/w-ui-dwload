@@ -9,6 +9,7 @@ import isearr from 'wsemi/src/isearr.mjs'
 import isu8arr from 'wsemi/src/isu8arr.mjs'
 import isEle from 'wsemi/src/isEle.mjs'
 import ispm from 'wsemi/src/ispm'
+import haskey from 'wsemi/src/haskey.mjs'
 import browserView from 'wsemi/src/browserView.mjs'
 import arrHas from 'wsemi/src/arrHas.mjs'
 import domConvertToPicDyn from 'wsemi/src/domConvertToPicDyn.mjs'
@@ -37,6 +38,7 @@ import downloadFileFromU8Arr from 'wsemi/src/downloadFileFromU8Arr.mjs'
  * @param {String} [opt.textInvalidEleTable='eleTable非元素'] 輸入提示eleTable非元素字串，預設'eleTable非元素'
  * @param {String} [opt.textInvalidLtdt='ltdt非陣列'] 輸入提示ltdt非陣列字串，預設'ltdt非陣列'
  * @param {String} [opt.textInvalidFileId='無檔案主鍵'] 輸入提示無檔案主鍵字串，預設'無檔案主鍵'
+ * @param {String} [opt.textInvalidKeyFilename='無檔案名稱主鍵'] 輸入提示無檔案名稱主鍵字串，預設'無檔案名稱主鍵'
  * @param {String} [opt.textInvalidFilename='無檔案名稱'] 輸入提示無檔案名稱字串，預設'無檔案名稱'
  * @param {String} [opt.textInvalidFileU8a='無檔案內容'] 輸入提示無檔案內容字串，預設'無檔案內容'
  * @param {String} [opt.textInvalidFileType='無檔案類型'] 輸入提示無檔案類型字串，預設'無檔案類型'
@@ -154,6 +156,13 @@ function WUiDwload(vo, opt = {}) {
     if (!isestr(textInvalidFileId)) {
         textInvalidFileId = '無檔案主鍵'
         // textInvalidFileId = 'invalid file ID'
+    }
+
+    //textInvalidKeyFilename
+    let textInvalidKeyFilename = get(opt, 'textInvalidKeyFilename')
+    if (!isestr(textInvalidKeyFilename)) {
+        textInvalidKeyFilename = '無檔案名稱主鍵'
+        // textInvalidFileId = 'invalid keyFilename'
     }
 
     //textInvalidFilename
@@ -738,6 +747,12 @@ function WUiDwload(vo, opt = {}) {
     async function downloadFile(file, setProg = null, opt = {}) {
         //file內至少需要id, 回傳至少需要fileName,u8a,type, setProg為下載進度通知函數可不給
 
+        //keyFileName
+        let keyFileName = get(opt, 'keyFileName')
+        if (!isestr(keyFileName)) {
+            keyFileName = 'fileName'
+        }
+
         //timeDelay
         let timeDelay = get(opt, 'timeDelay')
         if (!isNumber(timeDelay)) {
@@ -785,8 +800,14 @@ function WUiDwload(vo, opt = {}) {
                 r = await r
             }
 
+            //check
+            if (!haskey(r, keyFileName)) {
+                console.log(textInvalidKeyFilename, r)
+                return Promise.reject(textInvalidKeyFilename)
+            }
+
             //fileName
-            let fileName = get(r, 'fileName')
+            let fileName = get(r, keyFileName, '')
 
             //check
             if (!isestr(fileName)) {

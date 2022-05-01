@@ -1,7 +1,6 @@
 {
   "name": "w-ui-dwload",
-  "version": "1.0.2",
-  "description": "A tool of download in browser.",
+  "version": "1.0.3",
   "main": "dist/w-ui-dwload.umd.js",
   "dependencies": {
     "lodash": "^4.17.21",
@@ -25,9 +24,5 @@
     "browser"
   ],
   "author": "yuda-lyu(semisphere)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/yuda-lyu/w-ui-dwload/issues"
-  },
-  "homepage": "https://github.com/yuda-lyu/w-ui-dwload#readme"
+  "license": "MIT"
 }
