@@ -14,6 +14,7 @@
     <link type="text/css" rel="stylesheet" href="styles/prettify.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
     <script src="scripts/nav.js" defer></script>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -27,7 +28,9 @@
 
 <nav >
     
+    
     <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="w-ui-dwload.html">w-ui-dwload</a><ul class='methods'><li data-type='method'><a href="w-ui-dwload.html#.downloadFile">downloadFile</a></li><li data-type='method'><a href="w-ui-dwload.html#.downloadLtdt">downloadLtdt</a></li><li data-type='method'><a href="w-ui-dwload.html#.downloadPic">downloadPic</a></li><li data-type='method'><a href="w-ui-dwload.html#.downloadTable">downloadTable</a></li></ul></li></ul>
+    
 </nav>
 
 <div id="main">
@@ -45,7 +48,9 @@
 <header>
     
         <h2>
-        w-ui-dwload
+        
+            w-ui-dwload
+        
         </h2>
         
     
@@ -67,6 +72,10 @@
 
 
 <dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>前端UI下載套件</p></li></ul></dd>
+    
 
     
     <dt class="tag-source">Source:</dt>
@@ -110,26 +119,20 @@
 
 
 
-<div class="description usertext">
-    <p>前端UI下載套件</p>
-</div>
 
 
 
 
 
 
-
-
-
-    <h5>Example</h5>
+    <h5 class="h5-examples">Example</h5>
     
     <pre class="prettyprint"><code>let WUiDwload = window['w-ui-dwload']// console.log(WUiDwload)//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDwload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)</code></pre>
 
 
 
 
-    <h5>Parameters:</h5>
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -167,6 +170,7 @@
 <span class="param-type">Object</span>
 
 
+
             
             </td>
 
@@ -200,6 +204,7 @@
             
                 
 <span class="param-type">Object</span>
+
 
 
             
@@ -264,6 +269,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -301,6 +307,7 @@
             
                 
 <span class="param-type">String</span>
+
 
 
             
@@ -342,6 +349,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -379,6 +387,7 @@
             
                 
 <span class="param-type">Boolean</span>
+
 
 
             
@@ -420,6 +429,7 @@
 <span class="param-type">Array</span>
 
 
+
             
             </td>
 
@@ -457,6 +467,7 @@
             
                 
 <span class="param-type">String</span>
+
 
 
             
@@ -498,6 +509,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -535,6 +547,7 @@
             
                 
 <span class="param-type">String</span>
+
 
 
             
@@ -576,6 +589,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -613,6 +627,7 @@
             
                 
 <span class="param-type">String</span>
+
 
 
             
@@ -654,6 +669,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -691,6 +707,7 @@
             
                 
 <span class="param-type">String</span>
+
 
 
             
@@ -732,6 +749,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -769,6 +787,7 @@
             
                 
 <span class="param-type">String</span>
+
 
 
             
@@ -810,6 +829,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -847,6 +867,7 @@
             
                 
 <span class="param-type">String</span>
+
 
 
             
@@ -888,6 +909,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -925,6 +947,7 @@
             
                 
 <span class="param-type">String</span>
+
 
 
             
@@ -966,6 +989,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -1003,6 +1027,7 @@
             
                 
 <span class="param-type">String</span>
+
 
 
             
@@ -1057,7 +1082,7 @@
 
 
 
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -1073,6 +1098,7 @@
     <dd>
         
 <span class="param-type">Object</span>
+
 
 
     </dd>
@@ -1108,7 +1134,7 @@
 
     
 
-    <h4 class="name" id=".downloadFile"><span class="type-signature">(async, static) </span>downloadFile<span class="signature">(file, setProg, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".downloadFile"><span class="type-signature type-signature-async, static">(async, static) </span>downloadFile<span class="signature">(file, setProg, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -1116,6 +1142,10 @@
 
 
 <dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>前端呼叫函數(前後端)下載檔案</p></li></ul></dd>
+    
 
     
     <dt class="tag-source">Source:</dt>
@@ -1159,26 +1189,20 @@
 
 
 
-<div class="description usertext">
-    <p>前端呼叫函數(前後端)下載檔案</p>
-</div>
 
 
 
 
 
 
-
-
-
-    <h5>Example</h5>
+    <h5 class="h5-examples">Example</h5>
     
     <pre class="prettyprint"><code>let WUiDwload = window['w-ui-dwload']// console.log(WUiDwload)let file = {    'id': 'id-for-file',}//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: (fileId)=>{        //記得添加BOM        let u8a = wsemi.str2u8arr(`\ufeff中文測試Plain text, unformatted textText file, a type of computer file opened by most text softwareText string, a sequence of characters manipulated by softwareText message, a short electronic message designed for communication between mobile phone usersText (Chrome app), a text editor for the Google Chrome web browser`)        return {            fileName:'name-for-file',            u8a,            type:'text/plain',        }    },}let wuidw = WUiDwload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    wuidw.downloadFile(file)}</code></pre>
 
 
 
 
-    <h5>Parameters:</h5>
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -1216,6 +1240,7 @@
 <span class="param-type">Object</span>
 
 
+
             
             </td>
 
@@ -1249,6 +1274,7 @@
             
                 
 <span class="param-type">function</span>
+
 
 
             
@@ -1286,6 +1312,7 @@
             
                 
 <span class="param-type">Object</span>
+
 
 
             
@@ -1350,6 +1377,7 @@
 <span class="param-type">Number</span>
 
 
+
             
             </td>
 
@@ -1389,6 +1417,7 @@
 <span class="param-type">Boolean</span>
 
 
+
             
             </td>
 
@@ -1426,6 +1455,7 @@
             
                 
 <span class="param-type">Boolean</span>
+
 
 
             
@@ -1480,7 +1510,7 @@
 
 
 
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -1498,6 +1528,7 @@
 <span class="param-type">Promise</span>
 
 
+
     </dd>
 </dl>
 
@@ -1510,7 +1541,7 @@
 
     
 
-    <h4 class="name" id=".downloadLtdt"><span class="type-signature">(async, static) </span>downloadLtdt<span class="signature">(ltdt, eleName, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".downloadLtdt"><span class="type-signature type-signature-async, static">(async, static) </span>downloadLtdt<span class="signature">(ltdt, eleName, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -1518,6 +1549,10 @@
 
 
 <dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>前端將ltdt數據下載成為Excel檔(*.xlsx)</p></li></ul></dd>
+    
 
     
     <dt class="tag-source">Source:</dt>
@@ -1561,26 +1596,20 @@
 
 
 
-<div class="description usertext">
-    <p>前端將ltdt數據下載成為Excel檔(*.xlsx)</p>
-</div>
 
 
 
 
 
 
-
-
-
-    <h5>Example</h5>
+    <h5 class="h5-examples">Example</h5>
     
     <pre class="prettyprint"><code>let WUiDwload = window['w-ui-dwload']// console.log(WUiDwload)let ltdt = [    {        "firstName": "John",        "lastName": "Smith",        "sex": "male",        "age(年齡)": 25,    },    {        "firstName": "Worthly",        "lastName": "Bill",        "sex": "female",        "age(年齡)": 22,    },    {        "firstName": "Sandola",        "lastName": "Dell",        "sex": "male",        "age(年齡)": 31,    },]//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDwload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    let eleName = document.querySelector('#name')    wuidw.downloadLtdt(ltdt, eleName)    // let name = 'ltdt-name'    // wuidw.downloadLtdt(ltdt, name)}</code></pre>
 
 
 
 
-    <h5>Parameters:</h5>
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -1616,6 +1645,7 @@
             
                 
 <span class="param-type">Array</span>
+
 
 
             
@@ -1656,6 +1686,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -1689,6 +1720,7 @@
             
                 
 <span class="param-type">Object</span>
+
 
 
             
@@ -1753,6 +1785,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -1790,6 +1823,7 @@
             
                 
 <span class="param-type">Number</span>
+
 
 
             
@@ -1831,6 +1865,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -1870,6 +1905,7 @@
 <span class="param-type">Boolean</span>
 
 
+
             
             </td>
 
@@ -1907,6 +1943,7 @@
             
                 
 <span class="param-type">Boolean</span>
+
 
 
             
@@ -1961,7 +1998,7 @@
 
 
 
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -1979,6 +2016,7 @@
 <span class="param-type">Promise</span>
 
 
+
     </dd>
 </dl>
 
@@ -1991,7 +2029,7 @@
 
     
 
-    <h4 class="name" id=".downloadPic"><span class="type-signature">(async, static) </span>downloadPic<span class="signature">(elePic, eleName, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".downloadPic"><span class="type-signature type-signature-async, static">(async, static) </span>downloadPic<span class="signature">(elePic, eleName, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -1999,6 +2037,10 @@
 
 
 <dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>前端將dom下載成為圖片</p></li></ul></dd>
+    
 
     
     <dt class="tag-source">Source:</dt>
@@ -2042,26 +2084,20 @@
 
 
 
-<div class="description usertext">
-    <p>前端將dom下載成為圖片</p>
-</div>
 
 
 
 
 
 
-
-
-
-    <h5>Example</h5>
+    <h5 class="h5-examples">Example</h5>
     
     <pre class="prettyprint"><code>let WUiDwload = window['w-ui-dwload']// console.log(WUiDwload)//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDwload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    let eleTar = document.querySelector('#container')    let eleName = document.querySelector('#name')    wuidw.downloadPic(eleTar, eleName)}</code></pre>
 
 
 
 
-    <h5>Parameters:</h5>
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -2097,6 +2133,7 @@
             
                 
 <span class="param-type">HTMLElement</span>
+
 
 
             
@@ -2137,6 +2174,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -2170,6 +2208,7 @@
             
                 
 <span class="param-type">Object</span>
+
 
 
             
@@ -2234,6 +2273,7 @@
 <span class="param-type">Number</span>
 
 
+
             
             </td>
 
@@ -2271,6 +2311,7 @@
             
                 
 <span class="param-type">Number</span>
+
 
 
             
@@ -2312,6 +2353,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -2351,6 +2393,7 @@
 <span class="param-type">Boolean</span>
 
 
+
             
             </td>
 
@@ -2388,6 +2431,7 @@
             
                 
 <span class="param-type">Boolean</span>
+
 
 
             
@@ -2442,7 +2486,7 @@
 
 
 
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -2460,6 +2504,7 @@
 <span class="param-type">Promise</span>
 
 
+
     </dd>
 </dl>
 
@@ -2472,7 +2517,7 @@
 
     
 
-    <h4 class="name" id=".downloadTable"><span class="type-signature">(async, static) </span>downloadTable<span class="signature">(eleTable, eleName, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".downloadTable"><span class="type-signature type-signature-async, static">(async, static) </span>downloadTable<span class="signature">(eleTable, eleName, opt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -2480,6 +2525,10 @@
 
 
 <dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>前端將dom(table)內數據下載成為Excel檔(*.xlsx)</p></li></ul></dd>
+    
 
     
     <dt class="tag-source">Source:</dt>
@@ -2523,26 +2572,20 @@
 
 
 
-<div class="description usertext">
-    <p>前端將dom(table)內數據下載成為Excel檔(*.xlsx)</p>
-</div>
 
 
 
 
 
 
-
-
-
-    <h5>Example</h5>
+    <h5 class="h5-examples">Example</h5>
     
     <pre class="prettyprint"><code>let WUiDwload = window['w-ui-dwload']// console.log(WUiDwload)//wuidwlet vo = {    updateLoading: (v)=>{        console.log('updateLoading', v)    },    alert: (v, t)=>{        console.log('alert', v, t)    },    downloadFileById: ()=>{    },}let wuidw = WUiDwload(vo, {    keyFunDownloadFileById: 'downloadFileById',    keyFunUpdateLoading: 'updateLoading',    keyFunAlert: 'alert',})console.log(wuidw)function dw(){    let eleTar = document.querySelector('#container')    let eleName = document.querySelector('#name')    wuidw.downloadTable(eleTar, eleName)}</code></pre>
 
 
 
 
-    <h5>Parameters:</h5>
+    <h5 class="h5-parameters">Parameters:</h5>
     
 
 <table class="params">
@@ -2578,6 +2621,7 @@
             
                 
 <span class="param-type">HTMLElement</span>
+
 
 
             
@@ -2618,6 +2662,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -2651,6 +2696,7 @@
             
                 
 <span class="param-type">Object</span>
+
 
 
             
@@ -2715,6 +2761,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -2752,6 +2799,7 @@
             
                 
 <span class="param-type">Number</span>
+
 
 
             
@@ -2793,6 +2841,7 @@
 <span class="param-type">String</span>
 
 
+
             
             </td>
 
@@ -2832,6 +2881,7 @@
 <span class="param-type">Boolean</span>
 
 
+
             
             </td>
 
@@ -2869,6 +2919,7 @@
             
                 
 <span class="param-type">Boolean</span>
+
 
 
             
@@ -2923,7 +2974,7 @@
 
 
 
-<h5>Returns:</h5>
+<h5 class="h5-returns">Returns:</h5>
 
         
 <div class="param-desc">
@@ -2939,6 +2990,7 @@
     <dd>
         
 <span class="param-type">Promise</span>
+
 
 
     </dd>
@@ -2968,7 +3020,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Thu Jan 19 2023 12:44:02 GMT+0800 (台北標準時間) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Wed Mar 29 2023 15:12:07 GMT+0800 (台北標準時間) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
