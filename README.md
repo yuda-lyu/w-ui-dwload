@@ -35,5 +35,5 @@ npm i w-ui-dwload
 
 Add script for w-ui-dwload.
 ```alias
-<script src="https://cdn.jsdelivr.net/npm/w-ui-dwload@1.0.8/dist/w-ui-dwload.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/w-ui-dwload@1.0.9/dist/w-ui-dwload.umd.js"></script>
 ```
