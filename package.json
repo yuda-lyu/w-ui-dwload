@@ -1,6 +1,6 @@
 {
   "name": "w-ui-dwload",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "main": "dist/w-ui-dwload.umd.js",
   "dependencies": {
     "lodash-es": "^4.17.21",
