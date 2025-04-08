@@ -4,7 +4,6 @@ A tool of download in browser.
 ![language](https://img.shields.io/badge/language-JavaScript-orange.svg) 
 [![npm version](http://img.shields.io/npm/v/w-ui-dwload.svg?style=flat)](https://npmjs.org/package/w-ui-dwload) 
 [![license](https://img.shields.io/npm/l/w-ui-dwload.svg?style=flat)](https://npmjs.org/package/w-ui-dwload) 
-[![gzip file size](http://img.badgesize.io/yuda-lyu/w-ui-dwload/master/dist/w-ui-dwload.umd.js.svg?compression=gzip)](https://github.com/yuda-lyu/w-ui-dwload)
 [![npm download](https://img.shields.io/npm/dt/w-ui-dwload.svg)](https://npmjs.org/package/w-ui-dwload) 
 [![npm download](https://img.shields.io/npm/dm/w-ui-dwload.svg)](https://npmjs.org/package/w-ui-dwload) 
 [![jsdelivr download](https://img.shields.io/jsdelivr/npm/hm/w-ui-dwload.svg)](https://www.jsdelivr.com/package/npm/w-ui-dwload)
@@ -25,7 +24,6 @@ To view some examples for more understanding, visit examples:
 
 ## Installation
 ### Using npm(ES6 module):
-> **Note:** w-ui-dwload is mainly dependent on `lodash-es` and `wsemi`.
 ```alias
 npm i w-ui-dwload
 ```
@@ -35,5 +33,5 @@ npm i w-ui-dwload
 
 Add script for w-ui-dwload.
 ```alias
-<script src="https://cdn.jsdelivr.net/npm/w-ui-dwload@1.0.10/dist/w-ui-dwload.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/w-ui-dwload@1.0.11/dist/w-ui-dwload.umd.js"></script>
 ```
