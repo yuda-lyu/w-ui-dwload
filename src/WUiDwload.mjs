@@ -807,7 +807,7 @@ function WUiDwload(vo, opt = {}) {
                 r = await r
             }
 
-            //check, 使用stream下載直接由downloadFileById函數處理, 檔案二進位數據直接由瀏覽器接手自動儲存
+            //check, 使用stream下載, 須由downloadFileById處理與執行, 後端須提供GET+stream且前端(browser)須通過a.href+a.click()下載, 此時檔案下載直接由瀏覽器之下載進度管理器顯示與儲存
             if (useDownloadStream) {
                 return
             }
@@ -884,8 +884,8 @@ function WUiDwload(vo, opt = {}) {
         await core()
             .then(() => {
 
-                //useAlert
-                if (useAlert) {
+                //useAlert, 有使用alert且下載非stream時才於then執行alert
+                if (useAlert && !useDownloadStream) {
                     alert(`${textDownloadFileSuccessfully}: ${file.name}`)
                 }
 
