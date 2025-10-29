@@ -23,13 +23,13 @@ To view some examples for more understanding, visit examples:
 > **downloadFile:** [ex-downloadFile.html](https://yuda-lyu.github.io/w-ui-dwload/examples/ex-downloadFile.html) [[source code](https://github.com/yuda-lyu/w-ui-dwload/blob/master/docs/examples/ex-downloadFile.html)]
 
 ## Installation
+
 ### Using npm(ES6 module):
 ```alias
 npm i w-ui-dwload
 ```
 
 ### In a browser(UMD module):
-> **Note:** w-ui-dwload does not dependent on any package.
 
 Add script for w-ui-dwload.
 ```alias
