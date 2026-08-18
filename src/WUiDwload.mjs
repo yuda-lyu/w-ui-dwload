@@ -15,7 +15,7 @@ import arrHas from 'wsemi/src/arrHas.mjs'
 import domConvertToPicDyn from 'wsemi/src/domConvertToPicDyn.mjs'
 import ltdtkeysheads2mat from 'wsemi/src/ltdtkeysheads2mat.mjs'
 import downloadFileFromB64 from 'wsemi/src/downloadFileFromB64.mjs'
-import downloadExcelFileFromDataDyn from 'wsemi/src/downloadExcelFileFromDataDyn.mjs'
+import downloadExcelFileFromData from 'wsemi/src/downloadExcelFileFromData.mjs'
 import downloadFileFromU8Arr from 'wsemi/src/downloadFileFromU8Arr.mjs'
 
 
@@ -32,11 +32,9 @@ import downloadFileFromU8Arr from 'wsemi/src/downloadFileFromU8Arr.mjs'
  * @param {Boolean} [opt.useDownloadBrowserView=false] 輸入當使用下載檔案函數(downloadFileById)時，且非stream下載(useDownloadStream=false)，是否於下載後自動於瀏覽器分頁開啟布林值，預設false
  * @param {Array} [opt.browserViewTypes=['text/plain', 'application/rtf', 'application/json', 'text/csv', 'text/html', 'text/xml', 'application/xml', 'application/pdf', 'image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/bmp', 'image/svg+xml', 'image/webp', 'audio/mpeg', 'video/mpeg', 'video/mp4', 'video/webm']] 輸入當使用下載檔案函數(downloadFileById)時，識別可自動開啟之檔案類型清單陣列，預設['text/plain', 'application/rtf', 'application/json', 'text/csv', 'text/html', 'text/xml', 'application/xml', 'application/pdf', 'image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'image/bmp', 'image/svg+xml', 'image/webp', 'audio/mpeg', 'video/mpeg', 'video/mp4', 'video/webm']
  * @param {String} [opt.textErrorDownloadImage='無法下載圖片'] 輸入提示無法下載圖片字串，預設'無法下載圖片'
- * @param {String} [opt.textErrorDownloadTable='無法下載表格數據'] 輸入提示無法下載表格數據字串，預設'無法下載表格數據'
  * @param {String} [opt.textErrorDownloadLtdt='無法下載數據'] 輸入提示無法下載數據字串，預設'無法下載數據'
  * @param {String} [opt.textInvalidElePic='elePic非元素'] 輸入提示elePic非元素字串，預設'elePic非元素'
  * @param {String} [opt.textInvalidEleName='eleName非元素或字串'] 輸入提示eleName非元素或字串字串，預設'eleName非元素或字串'
- * @param {String} [opt.textInvalidEleTable='eleTable非元素'] 輸入提示eleTable非元素字串，預設'eleTable非元素'
  * @param {String} [opt.textInvalidLtdt='ltdt非陣列'] 輸入提示ltdt非陣列字串，預設'ltdt非陣列'
  * @param {String} [opt.textInvalidFileId='無檔案主鍵'] 輸入提示無檔案主鍵字串，預設'無檔案主鍵'
  * @param {String} [opt.textInvalidKeyFilename='無檔案名稱主鍵'] 輸入提示無檔案名稱主鍵字串，預設'無檔案名稱主鍵'
@@ -46,7 +44,7 @@ import downloadFileFromU8Arr from 'wsemi/src/downloadFileFromU8Arr.mjs'
  * @param {String} [opt.textDownloadingFile='開始下載檔案'] 輸入提示開始下載檔案字串，預設'開始下載檔案'
  * @param {String} [opt.textDownloadFileSuccessfully='下載檔案成功'] 輸入提示下載檔案成功字串，預設'下載檔案成功'
  * @param {String} [opt.textDownloadFileFailed='下載檔案失敗'] 輸入提示下載檔案失敗字串，預設'下載檔案失敗'
- * @returns {Object} 回傳各下載函數物件，包括'downloadPic','downloadTable','downloadLtdt','downloadFile'
+ * @returns {Object} 回傳各下載函數物件，包括'downloadPic','downloadLtdt','downloadFile'
  * @example
  *
  * let WUiDwload = window['w-ui-dwload']
@@ -116,13 +114,6 @@ function WUiDwload(vo, opt = {}) {
         // textErrorDownloadImage = 'can not download image'
     }
 
-    //textErrorDownloadTable
-    let textErrorDownloadTable = get(opt, 'textErrorDownloadTable')
-    if (!isestr(textErrorDownloadTable)) {
-        textErrorDownloadTable = '無法下載表格數據'
-        // textErrorDownloadTable = 'can not download table'
-    }
-
     //textErrorDownloadLtdt
     let textErrorDownloadLtdt = get(opt, 'textErrorDownloadLtdt')
     if (!isestr(textErrorDownloadLtdt)) {
@@ -142,13 +133,6 @@ function WUiDwload(vo, opt = {}) {
     if (!isestr(textInvalidEleName)) {
         textInvalidEleName = 'eleName非元素或字串'
         // textInvalidEleName = 'invalid eleName'
-    }
-
-    //textInvalidEleTable
-    let textInvalidEleTable = get(opt, 'textInvalidEleTable')
-    if (!isestr(textInvalidEleTable)) {
-        textInvalidEleTable = 'eleTable非元素'
-        // textInvalidEleTable = 'invalid eleTable'
     }
 
     //textInvalidLtdt
@@ -390,147 +374,6 @@ function WUiDwload(vo, opt = {}) {
     }
 
     /**
-     * 前端將dom(table)內數據下載成為Excel檔(*.xlsx)
-     *
-     * @memberOf w-ui-dwload
-     * @param {HTMLElement} eleTable 輸入表格所在元素
-     * @param {HTMLElement|String} eleName 輸入表名所在元素或表名字串
-     * @param {Object} [opt={}] 輸入設定物件，預設{}
-     * @param {String} [opt.nameSheet='data'] 輸入sheet名稱字串，預設'data'
-     * @param {Number} [opt.timeDelay=500] 輸入當使用updateLoading時，因畫面要渲染loading可能需延遲顯示才能看見動畫，故需給予延遲時間，單位ms，預設500
-     * @param {String} [opt.defName='table'] 輸入若無有效表名時預設名稱字串，預設'table'
-     * @param {Boolean} [opt.useAlert=true] 輸入是否使用alert布林值，預設true
-     * @param {Boolean} [opt.useUpdateLoading=true] 輸入是否使用updateLoading布林值，預設true
-     * @returns {Promise} 回傳Promise，resolve代表執行結束，不會有reject，將由console.log或alert(若有)顯示發生之錯誤訊息
-     * @example
-     *
-     * let WUiDwload = window['w-ui-dwload']
-     * // console.log(WUiDwload)
-     *
-     * //wuidw
-     * let vo = {
-     *     updateLoading: (v)=>{
-     *         console.log('updateLoading', v)
-     *     },
-     *     alert: (v, t)=>{
-     *         console.log('alert', v, t)
-     *     },
-     *     downloadFileById: ()=>{
-     *     },
-     * }
-     * let wuidw = WUiDwload(vo, {
-     *     keyFunDownloadFileById: 'downloadFileById',
-     *     keyFunUpdateLoading: 'updateLoading',
-     *     keyFunAlert: 'alert',
-     * })
-     * console.log(wuidw)
-     *
-     * function dw(){
-     *     let eleTar = document.querySelector('#container')
-     *     let eleName = document.querySelector('#name')
-     *     wuidw.downloadTable(eleTar, eleName)
-     * }
-     *
-     */
-    async function downloadTable(eleTable, eleName, opt = {}) {
-
-        //nameSheet
-        let nameSheet = get(opt, 'nameSheet')
-        if (!isestr(nameSheet)) {
-            nameSheet = 'data'
-        }
-
-        //timeDelay
-        let timeDelay = get(opt, 'timeDelay')
-        if (!isNumber(timeDelay)) {
-            timeDelay = 500
-        }
-
-        //defName
-        let defName = get(opt, 'defName')
-        if (!isestr(defName)) {
-            defName = 'table'
-        }
-
-        //useAlert
-        let useAlert = get(opt, 'useAlert')
-        if (!isbol(useAlert)) {
-            useAlert = true
-        }
-
-        //useUpdateLoading
-        let useUpdateLoading = get(opt, 'useUpdateLoading')
-        if (!isbol(useUpdateLoading)) {
-            useUpdateLoading = true
-        }
-
-        async function core(eleTable, eleName) {
-
-            //check
-            if (!isEle(eleTable)) {
-                return Promise.reject(textInvalidEleTable)
-            }
-            if (!isEle(eleName) && !isestr(eleName)) {
-                return Promise.reject(textInvalidEleName)
-            }
-
-            //name
-            let name = ''
-            if (isEle(eleName)) {
-                name = get(eleName, 'innerText')
-            }
-            else {
-                name = eleName
-            }
-            if (!isestr(name)) {
-                name = defName
-            }
-
-            //fn
-            let fn = `${name}.xlsx`
-
-            //downloadExcelFileFromDataDyn
-            await downloadExcelFileFromDataDyn(fn, nameSheet, eleTable)
-
-        }
-
-        //useUpdateLoading
-        if (useUpdateLoading) {
-
-            //show loading
-            updateLoading(true)
-
-            //delay
-            await delay(timeDelay)
-
-        }
-
-        //core
-        await core(eleTable, eleName)
-            .catch((err) => {
-                console.log(err)
-
-                //useAlert
-                if (useAlert) {
-                    alert(textErrorDownloadTable, { type: 'error' })
-                }
-
-            })
-            .finally(() => {
-
-                //useUpdateLoading
-                if (useUpdateLoading) {
-
-                    //hide loading
-                    updateLoading(false)
-
-                }
-
-            })
-
-    }
-
-    /**
      * 前端將ltdt數據下載成為Excel檔(*.xlsx)
      *
      * @memberOf w-ui-dwload
@@ -655,8 +498,11 @@ function WUiDwload(vo, opt = {}) {
             //ltdtkeysheads2mat
             let mat = ltdtkeysheads2mat(ltdt)
 
-            //downloadExcelFileFromDataDyn
-            await downloadExcelFileFromDataDyn(fn, nameSheet, mat)
+            //downloadExcelFileFromData, 失敗時resolve回傳{error}物件, 轉為reject使外層catch照常提示
+            let r = await downloadExcelFileFromData(fn, nameSheet, mat)
+            if (get(r, 'error', '') !== '') {
+                return Promise.reject(r.error)
+            }
 
         }
 
@@ -919,9 +765,7 @@ function WUiDwload(vo, opt = {}) {
     }
 
     return {
-        downloadPic,
-        downloadTable,
-        downloadLtdt,
+        downloadPic,        downloadLtdt,
         downloadFile,
     }
 }

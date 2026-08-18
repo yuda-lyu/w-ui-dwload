@@ -13,7 +13,6 @@ let mUIdws = WUiDwload(vo, {
 let mUI = {
 
     // downloadPic,
-    // downloadTable,
     // downloadLtdt,
     // downloadFile,
     ...mUIdws,
