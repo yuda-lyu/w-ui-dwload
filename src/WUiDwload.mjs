@@ -12,7 +12,7 @@ import ispm from 'wsemi/src/ispm.mjs'
 import haskey from 'wsemi/src/haskey.mjs'
 import browserView from 'wsemi/src/browserView.mjs'
 import arrHas from 'wsemi/src/arrHas.mjs'
-import domConvertToPicDyn from 'wsemi/src/domConvertToPicDyn.mjs'
+import domConvertToPic from 'wsemi/src/domConvertToPic.mjs'
 import ltdtkeysheads2mat from 'wsemi/src/ltdtkeysheads2mat.mjs'
 import downloadFileFromB64 from 'wsemi/src/downloadFileFromB64.mjs'
 import downloadExcelFileFromData from 'wsemi/src/downloadExcelFileFromData.mjs'
@@ -327,7 +327,7 @@ function WUiDwload(vo, opt = {}) {
 
             //b64
             //let b64 = await html2picDyn(elePic, { scale }) //無法支援大圖
-            let b64 = await domConvertToPicDyn(elePic, { scale }) //不支援IE11與Safari
+            let b64 = await domConvertToPic(elePic, { scale }) //不支援IE11與Safari
 
             //reset background
             elePic.style.background = c
