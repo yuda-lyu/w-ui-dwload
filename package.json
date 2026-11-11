@@ -1,12 +1,12 @@
 {
   "name": "w-ui-dwload",
-  "version": "1.0.46",
+  "version": "1.0.47",
   "main": "dist/w-ui-dwload.umd.js",
   "dependencies": {
-    "wsemi": "^1.9.55"
+    "wsemi": "^1.9.56"
   },
   "devDependencies": {
-    "w-package-tools": "^1.1.25"
+    "w-package-tools": "^1.1.26"
   },
   "scripts": {
     "test": "mocha --parallel \"test/*.test.mjs\" --timeout 180000",
