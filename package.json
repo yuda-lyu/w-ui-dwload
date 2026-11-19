@@ -1,9 +1,9 @@
 {
   "name": "w-ui-dwload",
-  "version": "1.0.59",
+  "version": "1.0.60",
   "main": "dist/w-ui-dwload.umd.js",
   "dependencies": {
-    "wsemi": "^1.9.68"
+    "wsemi": "^1.9.69"
   },
   "devDependencies": {
     "w-package-tools": "^1.1.28"
